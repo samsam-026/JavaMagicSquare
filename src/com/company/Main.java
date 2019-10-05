@@ -44,4 +44,42 @@ public class Main {
         // displays bye once the user enters n or N for begin variable
         System.out.println("Bye!");
     }
+    private static int validateValues(String message) {
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextInt()) {
+            //System.err will print the error message in another colour (red)
+            System.err.println("Data entered is not integer");
+            System.out.println(message);
+            //takes input till a space is entered
+            input.next();
+        }
+        return input.nextInt(); //returns only integer type after validation
+    }
+    private static int[][] getValues(int size) {
+        int[][] numbers = new int[size][size]; // saving memory space for the numbers array of integer type
+        //the while block is used to check if the number going to be entered is an integer
+        int count = -1; // initialising count also it is used as a counter for the loop
+        // the loop runs from -1 to size-1 as once it enters the loop count becomes 0
+        int counter = 0;
+        while (count < size - 1) {
+            int count1 = -1;
+            count++;
+            while (count1 < size - 1) {
+                count1++;
+                counter++; // counter is used to help the user keep a track at which number he has entered
+                String message = "Enter number " + counter;
+                System.out.println(message);
+                //the while block is used to check if the number going to be entered is an integer
+                int number = validateValues(message);// once the data is validated for the data type, the data is assigned to the number variable
+                //if block used to check if the number is less than 1 and if so prints an error message and decreases count1 by 1
+                if (number < 1) {
+                    System.err.println("Please enter only positive numbers");
+                    count1--;
+                } else {
+                    numbers[count][count1] = number;
+                }
+            }
+        }
+        return numbers;// returns the numbers array
+    }
 }
