@@ -82,6 +82,21 @@ public class Main {
         }
         return numbers;// returns the numbers array
     }
+    private static void displaySquare(int[][] numbers, int size) {
+        // for loop is used to change the row number
+        //this line is used to separate the input from the output to help the user to differentiate
+        System.out.println("                                                                                         ");
+        System.out.println("The square is :");
+        for (int index = 0; index < size; index++) {
+            String displayMatrix = "";
+            // this for loop is used to change the column number
+            for (int index1 = 0; index1 < size; index1++) {
+                String numInString = Integer.toString(numbers[index][index1]); // the numbers are are first converted to string and assigned to a variable called numInString
+                displayMatrix = displayMatrix + numInString + " "; //concatenates the display matrix, numInString and " "
+            }
+            System.out.println(displayMatrix);// prints the square
+        }
+    }
     private static boolean isMagicSquare(int[][] numbers, int size) {
         boolean magicSquare = true; // initialising the magic square variable
         int[] sum; // saving memory space for an array of integer type
