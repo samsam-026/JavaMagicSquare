@@ -1,5 +1,6 @@
 package com.company;
 
+
 import java.util.Scanner; // importing Scanner class to use it to get user's input
 
 public class Main {
@@ -44,6 +45,7 @@ public class Main {
         // displays bye once the user enters n or N for begin variable
         System.out.println("Bye!");
     }
+
     private static int validateValues(String message) {
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt()) {
@@ -55,6 +57,7 @@ public class Main {
         }
         return input.nextInt(); //returns only integer type after validation
     }
+
     private static int[][] getValues(int size) {
         int[][] numbers = new int[size][size]; // saving memory space for the numbers array of integer type
         //the while block is used to check if the number going to be entered is an integer
@@ -82,6 +85,7 @@ public class Main {
         }
         return numbers;// returns the numbers array
     }
+
     private static void displaySquare(int[][] numbers, int size) {
         // for loop is used to change the row number
         //this line is used to separate the input from the output to help the user to differentiate
@@ -97,6 +101,7 @@ public class Main {
             System.out.println(displayMatrix);// prints the square
         }
     }
+
     private static boolean isMagicSquare(int[][] numbers, int size) {
         boolean magicSquare = true; // initialising the magic square variable
         int[] sum; // saving memory space for an array of integer type
@@ -136,4 +141,61 @@ public class Main {
             size1--;
 
         }
+        // for loop to check if the sum elements are the same or different and determine if this square is a magic square or not
+        for (int element : sum) {// main loop
+            for (int element1 : sum) {// small loop
+                // enters this if block if at least one of the sum element is different from the others
+                if (element != element1) {
+                    magicSquare = false;
+                }
+            }
+        }
+        // if block used to print if the square is magic square
+        if (magicSquare) {
+            System.out.println("Is magic square: True");
+        } else {
+            System.out.println("Is magic square: False");
+        }
+        return magicSquare;
+    }
+
+    private static void isLoShu(int[][] numbers, boolean magicSquare, int size) {
+        boolean loShu = true;
+        if (size == 3) {
+            if (magicSquare) {    // checks if the square is a magic square
+                for (int index = 0; index < size; index++) {
+                    for (int index1 = 0; index1 < size; index1++) {
+                        if (numbers[index][index1] < 1 || numbers[index][index1] > 9) {// checks if element if from 1-9 if the aren't loShu is assigned false
+                            loShu = false;
+                        }
+                    }
+                }
+                if (loShu) { // so after the program checks if it is within 1-9 its uniqueness is checked
+                    //index, index1, index3, index4 are all indexes used for the numbers array
+                    for (int index = 0; index < size; index++) { //change row of right hand-side numbers' element
+                        for (int index1 = 0; index1 < size; index1++) { //change column of right hand-side numbers'element
+                            for (int index2 = 0; index2 < size; index2++) {//change row of left hand-side numbers' element
+                                for (int index3 = 0; index3 < size; index3++) { //change column of left hand-side numbers'element
+                                    if ((numbers[index][index1] == numbers[index2][index3]) && (index1 != index3)) { // check if two elements are the same when their indexes are different
+                                        loShu = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                loShu = false;// in the case the square is not a magic square it cannot be a lo shu square as well
+            }
+        } else {
+            loShu = false;
+        }
+        // if block used to print if the square is lo Shu magic square
+        if (loShu) {
+            System.out.println("Is Lo Shu square: True");
+        } else {
+            System.out.println("Is Lo Shu square: False");
+        }
+        System.out.println("*********************************************************************************");
+    }
 }
