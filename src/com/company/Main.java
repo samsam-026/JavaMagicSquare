@@ -82,4 +82,43 @@ public class Main {
         }
         return numbers;// returns the numbers array
     }
+    private static boolean isMagicSquare(int[][] numbers, int size) {
+        boolean magicSquare = true; // initialising the magic square variable
+        int[] sum; // saving memory space for an array of integer type
+        int sizeOfSum = (size * 2) + 2; // the sizeOfSum=no of rows + no of columns+ 2 diagonals
+        sum = new int[sizeOfSum]; // number of elements in size depend on the sizeOfSum variable
+        int counter = 0;//is used as index for the sum array
+        //this for loop is used to add the elements per row and assign it to sum[index]
+        for (int index = 0; index < size; index++) {
+            sum[counter] = 0;
+            for (int index1 = 0; index1 < size; index1++) {
+                sum[counter] += numbers[index][index1];
+            }
+            counter++;
+        }
+        int index = size; //is the the index of sum array for this for loop
+        //this for loop is used to add elements in a column and assign to sum[index]
+        for (int index1 = 0; index1 < size; index1++) {
+            sum[index] = 0;
+            for (int index2 = 0; index2 < size; index2++) {
+                sum[index] += numbers[index2][index1];
+            }
+            index++;
+        }
+        //this for diagonal one that is from left upper corner to right lower corner
+        // the elements indexes' will always be equal
+        sum[sizeOfSum - 2] = 0;
+        for (int count = 0; count < size; count++) {
+            sum[sizeOfSum - 2] += numbers[count][count];
+        }
+        //this is for the diagonal from the right upper corner to left lower corner
+        sum[sizeOfSum - 1] = 0;
+        int size1 = size - 1;
+        //for example if the size is 3 then first element added will be 0,2
+        //the row increases from 0 till the size by 1 where as the column decreases from the size1 variable by 1
+        for (int count = 0; count < size; count++) {
+            sum[sizeOfSum - 1] += numbers[count][size1];
+            size1--;
+
+        }
 }
